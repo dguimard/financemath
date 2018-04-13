@@ -1,0 +1,1 @@
+package com.guimard.finance.math;public interface StoppingTime {    public abstract boolean stop(int t);}
