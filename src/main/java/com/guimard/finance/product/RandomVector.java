@@ -3,22 +3,18 @@ package com.guimard.finance.product;
 import com.guimard.finance.math.Vector;
 
 
-
 public abstract class RandomVector {
 
     int dim;
-
-
-    public int dim() {
-        return dim;
-    }
-
 
 
     public RandomVector(int d) {
         dim = d;
     }
 
+    public int dim() {
+        return dim;
+    }
 
     public abstract double[] getValue(int t);
 
@@ -42,8 +38,7 @@ public abstract class RandomVector {
     }
 
 
-    public double[][]
-    conditionalMeanAndStandardDeviation(int t, int N) {
+    public double[][] conditionalMeanAndStandardDeviation(int t, int N) {
         double[] X,                            // current sample
                 sum = new double[dim],          // current sample sum
                 sumSquares = new double[dim],
@@ -82,8 +77,7 @@ public abstract class RandomVector {
     }
 
 
-    public double[][]
-    conditionalMeanAndStandardDeviation(int t, int N, int sampleGroupSize) {
+    public double[][] conditionalMeanAndStandardDeviation(int t, int N, int sampleGroupSize) {
         int nSampleGroups = N / sampleGroupSize;  //note integer division
 
         double[] X,                           // sample vector
@@ -154,8 +148,8 @@ public abstract class RandomVector {
     public double[] expectation(int N, int m) {
         return conditionalExpectation(0, N, m);
     }
-    public double[][]
-    conditionalMeanAndStandardDeviation
+
+    public double[][] conditionalMeanAndStandardDeviation
             (int t, int N, int m, int sampleGroupSize) {
         int nSampleGroups = N / sampleGroupSize;  //note integer division
 
@@ -208,9 +202,7 @@ public abstract class RandomVector {
     } //end meanAndStandardDeviation 
 
 
-
-    public double[][] meanAndStandardDeviation
-    (int N, int m, int sampleGroupSize) {
+    public double[][] meanAndStandardDeviatio(int N, int m, int sampleGroupSize) {
         return conditionalMeanAndStandardDeviation
                 (0, N, m, sampleGroupSize);
     }
@@ -256,8 +248,7 @@ public abstract class RandomVector {
                 m = N / 200;  // number of samples completed for next report
 
 
-        // sample means, covariances
-        // note symmetry, operate on lower triangular half only
+
         for (int n = 0; n < N; n++) {
             double[] x = getValue(t);
 

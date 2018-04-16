@@ -1,12 +1,10 @@
 package com.guimard.finance.product;
 
-
 public abstract class Trigger {
 
-    int T;   
+    int T;
 
-    public Trigger(int T)  //can only be called from concrete subclasses
-    {
+    public Trigger(int T) {
         this.T = T;
     }
 

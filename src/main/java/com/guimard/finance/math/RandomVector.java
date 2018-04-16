@@ -35,9 +35,6 @@ public abstract class RandomVector {
     }
 
 
-
-
-
     public double[][]
     conditionalMeanAndStandardDeviation(int t, int N, int sampleGroupSize) {
         int nSampleGroups = N / sampleGroupSize;

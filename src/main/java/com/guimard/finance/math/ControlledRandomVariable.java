@@ -153,7 +153,6 @@ public abstract class ControlledRandomVariable extends RandomVariable {
     }
 
 
-
     public double expectation(double precision, double confidence) {
         return conditionalExpectation(0, precision, confidence);
     }

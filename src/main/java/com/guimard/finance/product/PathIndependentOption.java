@@ -30,7 +30,6 @@ public abstract class PathIndependentOption extends Option {
     } //end DiscountedPayoff
 
 
-
     public ControlledRandomVariable controlledDiscountedPayoff() {
         ControlledRandomVariable
                 controlled_discounted_payoff = new ControlledRandomVariable() {
@@ -109,8 +108,7 @@ public abstract class PathIndependentOption extends Option {
         } // end else if
 
         else { // whichProbability==MARKET_PROBABILITY
-            // compute gain as E_t(DeltaS(t)DeltaC(t))/E_t(DeltaS(t)^2)
-            // where C[t], C[t+1] are computed using path branching
+
 
             C[t] = discountedMonteCarloPrice(t, nPath);
             for (int n = 0; n < nPath; n++) {
@@ -131,8 +129,7 @@ public abstract class PathIndependentOption extends Option {
     } // end minimumVarianceDelta
 
 
-    public double minimumVarianceDelta
-            (int whichProbability, int t, int nPath, Trigger rebalance) {
+    public double minimumVarianceDelta (int whichProbability, int t, int nPath, Trigger rebalance) {
         underlying.simulationInit(t);         //sets pathCounter to zero
 
         if (hasAnalyticPrice()) {

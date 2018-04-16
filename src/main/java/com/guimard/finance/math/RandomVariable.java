@@ -39,54 +39,8 @@ public abstract class RandomVariable {
      * central moment?
      */
     boolean hasConditionalAnalyticCentralMoment;
-
-
-    public boolean get_hasAnalyticMean() {
-        return hasAnalyticMean;
-    }
-
-
-    public boolean get_hasConditionalAnalyticMean() {
-        return hasConditionalAnalyticMean;
-    }
-
-    public boolean get_hasAnalyticVariance() {
-        return hasAnalyticVariance;
-    }
-
-
-    public boolean get_hasConditionalAnalyticVariance() {
-        return hasConditionalAnalyticVariance;
-    }
-
-
-    public boolean get_hasAnalyticMoment() {
-        return hasAnalyticMoment;
-    }
-
-
-    public boolean get_hasConditionalAnalyticMoment() {
-        return hasConditionalAnalyticMoment;
-    }
-
-
-    public boolean get_hasAnalyticCentralMoment() {
-        return hasAnalyticCentralMoment;
-    }
-
-
-    public boolean get_hasConditionalAnalyticCentralMoment() {
-        return hasConditionalAnalyticCentralMoment;
-    }
-
-    public void setHasAnalyticMean(boolean value) {
-        hasAnalyticMean = value;
-    }
-
-    public void setHasAnalyticVariance(boolean value) {
-        hasAnalyticVariance = value;
-    }
-
+    EmpiricalDistribution empiricalDist;
+    boolean empiricalDistributionIsInitialized;
 
     public RandomVariable() {
         hasAnalyticMean = false;
@@ -122,8 +76,47 @@ public abstract class RandomVariable {
         empiricalDistributionIsInitialized = false;
     }
 
-    public abstract double getValue(int t);
+    public boolean get_hasAnalyticMean() {
+        return hasAnalyticMean;
+    }
 
+    public boolean get_hasConditionalAnalyticMean() {
+        return hasConditionalAnalyticMean;
+    }
+
+    public boolean get_hasAnalyticVariance() {
+        return hasAnalyticVariance;
+    }
+
+    public boolean get_hasConditionalAnalyticVariance() {
+        return hasConditionalAnalyticVariance;
+    }
+
+    public boolean get_hasAnalyticMoment() {
+        return hasAnalyticMoment;
+    }
+
+    public boolean get_hasConditionalAnalyticMoment() {
+        return hasConditionalAnalyticMoment;
+    }
+
+    public boolean get_hasAnalyticCentralMoment() {
+        return hasAnalyticCentralMoment;
+    }
+
+    public boolean get_hasConditionalAnalyticCentralMoment() {
+        return hasConditionalAnalyticCentralMoment;
+    }
+
+    public void setHasAnalyticMean(boolean value) {
+        hasAnalyticMean = value;
+    }
+
+    public void setHasAnalyticVariance(boolean value) {
+        hasAnalyticVariance = value;
+    }
+
+    public abstract double getValue(int t);
 
     public double analyticConditionalMean(int t) {
         String message =
@@ -145,7 +138,6 @@ public abstract class RandomVariable {
         return 0; // for the compiler
     }
 
-
     public double analyticConditionalVariance(int t) {
         String message =
                 "RandomVariable.analyticConditionalVariance()\n:" +
@@ -154,7 +146,6 @@ public abstract class RandomVariable {
 
         return 0; // for the compiler
     }
-
 
     public double analyticVariance() {
         String message =
@@ -165,7 +156,6 @@ public abstract class RandomVariable {
         //to log it properly
         return 0; // for the compiler
     }
-
 
     public double analyticConditionalMoment(int t, int n) {
         String message =
@@ -180,7 +170,6 @@ public abstract class RandomVariable {
 
     }
 
-
     public double analyticMoment(int n) {
         String message =
                 "RandomVariable.analyticMean()\n:" +
@@ -192,7 +181,6 @@ public abstract class RandomVariable {
         return 0; // for the compiler
 
     }
-
 
     public double analyticConditionalCentraMoment(int t, int n) {
         String message =
@@ -206,7 +194,6 @@ public abstract class RandomVariable {
 
     }
 
-
     public double analyticCentralMoment(int n) {
         String message =
                 "RandomVariable.analyticCentralMoment()\n:" +
@@ -217,7 +204,6 @@ public abstract class RandomVariable {
 
         return 0; // for the compiler
     }
-
 
     public double
     conditionalExpectation(int t, int N) {
@@ -235,7 +221,6 @@ public abstract class RandomVariable {
     public double expectation(int N) {
         return conditionalExpectation(0, N);
     }
-
 
     public double
     conditionalExpectation(int t, int N, boolean report) {
@@ -258,7 +243,6 @@ public abstract class RandomVariable {
     public double expectation(int N, boolean report) {
         return conditionalExpectation(0, N, report);
     }
-
 
     public double[]
     conditionalMeanAndStandardDeviation(int t, int N) {
@@ -284,7 +268,6 @@ public abstract class RandomVariable {
         double[] results = {mean_X, sigma_X};
         return results;
     }
-
 
     public double[] meanAndStandardDeviation(int N) {
         return conditionalMeanAndStandardDeviation(0, N);
@@ -325,8 +308,6 @@ public abstract class RandomVariable {
 
     } //end meanAndStandardDeviation
 
-
-
     public double[]
     meanAndStandardDeviation(int N, int sampleGroupSize) {
         return conditionalMeanAndStandardDeviation(0, N, sampleGroupSize);
@@ -344,7 +325,6 @@ public abstract class RandomVariable {
 
         return sum / N;
     }
-
 
     public double expectation(int N, int m) {
         return conditionalExpectation(0, N, m);
@@ -391,13 +371,11 @@ public abstract class RandomVariable {
 
     } //end meanAndStandardDeviation
 
-
     public double[] meanAndStandardDeviation
             (int N, int m, int sampleGroupSize) {
         return conditionalMeanAndStandardDeviation
                 (0, N, m, sampleGroupSize);
     }
-
 
     public double
     conditionalExpectation(int t, double precision, double confidence) {
@@ -443,7 +421,6 @@ public abstract class RandomVariable {
         return conditionalExpectation(0, precision, confidence);
     }
 
-
     public double conditionalExpectation
             (int t, double precision, double confidence, int sampleGroupSize) {
         double group_sum,           //sum of sample values in a group
@@ -488,12 +465,10 @@ public abstract class RandomVariable {
 
     } //end getExpectation
 
-
     public double expectation
             (double precision, double confidence, int sampleGroupSize) {
         return conditionalExpectation(0, precision, confidence, sampleGroupSize);
     }
-
 
     public double conditionalVariance(int t, int N) {
         double sum_X = 0,
@@ -514,7 +489,6 @@ public abstract class RandomVariable {
         return mean_X_square - mean_X * mean_X;
 
     }
-
 
     /**
      * <p>Variance computed from a sample of size N.</p>
@@ -545,11 +519,9 @@ public abstract class RandomVariable {
 
     }//end conditionalMoment
 
-
     double moment(final int n, final int N) {
         return conditionalMoment(0, n, N);
     }
-
 
     public RandVariable centered_X(final int t, final int n, final int N) {
         double m = 0;
@@ -572,12 +544,10 @@ public abstract class RandomVariable {
 
     } // end centered_X
 
-
     double conditionalCentralMoment(final int t, final int n, final int N) {
         return centered_X(t, n, N).mean(N);
 
     }//end conditionalCentralMoment
-
 
     double centralMoment(final int n, final int N) {
         double mu = 0;  //the mean
@@ -600,12 +570,6 @@ public abstract class RandomVariable {
         return Xcn.mean(N);
 
     }//end moment
-
-    EmpiricalDistribution empiricalDist;
-
-
-    boolean empiricalDistributionIsInitialized;
-
 
     public boolean get_empiricalDistributionIsInitialized() {
         return empiricalDistributionIsInitialized;
