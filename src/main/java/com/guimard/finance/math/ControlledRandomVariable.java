@@ -1,8 +1,6 @@
 package com.guimard.finance.math;
 
 public abstract class ControlledRandomVariable extends RandomVariable {
-
-
     public static final int nBeta = 2000;
 
     private double beta_at_time_zero;
@@ -135,14 +133,12 @@ public abstract class ControlledRandomVariable extends RandomVariable {
     }
 
 
-    public double
-    conditionalExpectation(int t, int N, int m) {
+    public double conditionalExpectation(int t, int N, int m) {
         return controlled_X(t).expectation(N, m);
     }
 
 
-    public double
-    expectation(int N, int m) {
+    public double  expectation(int N, int m) {
         return conditionalExpectation(0, N, m);
     }
 
@@ -169,6 +165,4 @@ public abstract class ControlledRandomVariable extends RandomVariable {
             (double precision, double confidence, int sampleGroupSize) {
         return conditionalExpectation(0, precision, confidence, sampleGroupSize);
     }
-
-
 }

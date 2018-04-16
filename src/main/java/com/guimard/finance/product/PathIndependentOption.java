@@ -65,8 +65,7 @@ public abstract class PathIndependentOption extends Option {
     } // end ControlledDiscountedPayoff
 
 
-    public double minimumVarianceDelta
-            (int whichProbability, int t, int nPath) {
+    public double minimumVarianceDelta (int whichProbability, int t, int nPath) {
         underlying.simulationInit(t);         //sets pathCounter to zero
         double numSum = 0, denomSum = 0;
 
