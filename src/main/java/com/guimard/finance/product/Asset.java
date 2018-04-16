@@ -148,5 +148,4 @@ public abstract class Asset {
     }
 
 
-} // end asset
-
+}

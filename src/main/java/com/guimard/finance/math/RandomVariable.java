@@ -6,38 +6,25 @@ public abstract class RandomVariable {
 
     boolean hasAnalyticMean;
 
-    /**
-     * Is an analytic formula implemented for the conditional mean?
-     */
+
     boolean hasConditionalAnalyticMean;
 
-    /**
-     * Is an analytic formula implemented for the unconditional variance?
-     */
+
     boolean hasAnalyticVariance;
 
-    /**
-     * Is an analytic formula implemented for the conditional variance?
-     */
+
     boolean hasConditionalAnalyticVariance;
 
-    /**
-     * Is an analytic formula implemented for the unconditional moment?
-     */
+
     boolean hasAnalyticMoment;
 
-    /**
-     * Is an analytic formula implemented for the conditional moment?
-     */
+
     boolean hasConditionalAnalyticMoment;
 
 
     boolean hasAnalyticCentralMoment;
 
-    /**
-     * Is an analytic formula implemented for the conditional
-     * central moment?
-     */
+
     boolean hasConditionalAnalyticCentralMoment;
     EmpiricalDistribution empiricalDist;
     boolean empiricalDistributionIsInitialized;
@@ -213,11 +200,7 @@ public abstract class RandomVariable {
         return sum_X / N;
     }
 
-    /**
-     * <p>Unconditional expectation computed from sample of size N.</p>
-     *
-     * @param N Sample size.
-     */
+
     public double expectation(int N) {
         return conditionalExpectation(0, N);
     }
@@ -234,12 +217,7 @@ public abstract class RandomVariable {
         return sum_X / N;
     }
 
-    /**
-     * <p>Unconditional expectation computed from sample of size N.</p>
-     *
-     * @param N      Sample size.
-     * @param report dummy parameter, report is always delivered.
-     */
+
     public double expectation(int N, boolean report) {
         return conditionalExpectation(0, N, report);
     }
@@ -348,10 +326,7 @@ public abstract class RandomVariable {
         long before = System.currentTimeMillis();
 
         for (int n = 0; n < nSampleGroups; n++) {
-            //progress report every m sample groups
 
-
-            //compute the mean over the next sample group
             group_sum = 0;
             for (int k = 0; k < sampleGroupSize; k++) group_sum += getValue(t);
             group_mean = group_sum / sampleGroupSize;
@@ -396,7 +371,6 @@ public abstract class RandomVariable {
             double x = getValue(t);      //x=X_n
             sum += x;
             sumSquares += x * x;
-
             //check for termination every 100 samples
             if (n % 100 == 99) {
                 mean = sum / n;
@@ -416,13 +390,11 @@ public abstract class RandomVariable {
 
     }
 
-    public double
-    expectation(double precision, double confidence) {
+    public double  expectation(double precision, double confidence) {
         return conditionalExpectation(0, precision, confidence);
     }
 
-    public double conditionalExpectation
-            (int t, double precision, double confidence, int sampleGroupSize) {
+    public double conditionalExpectation (int t, double precision, double confidence, int sampleGroupSize) {
         double group_sum,           //sum of sample values in a group
                 group_mean,          //mean of the current sample group
                 sum = 0,               //sum of group means
@@ -465,8 +437,7 @@ public abstract class RandomVariable {
 
     } //end getExpectation
 
-    public double expectation
-            (double precision, double confidence, int sampleGroupSize) {
+    public double expectation (double precision, double confidence, int sampleGroupSize) {
         return conditionalExpectation(0, precision, confidence, sampleGroupSize);
     }
 
@@ -490,11 +461,6 @@ public abstract class RandomVariable {
 
     }
 
-    /**
-     * <p>Variance computed from a sample of size N.</p>
-     *
-     * @param N Size of sample used to estimate the variance.
-     */
     public double variance(int N) {
         return conditionalVariance(0, N);
     }
@@ -517,7 +483,7 @@ public abstract class RandomVariable {
 
         return Xn.conditionalMean(t, N);
 
-    }//end conditionalMoment
+    }
 
     double moment(final int n, final int N) {
         return conditionalMoment(0, n, N);
@@ -555,8 +521,6 @@ public abstract class RandomVariable {
         if (hasAnalyticMean) mu = analyticMean();
         else mu = expectation(N);
 
-        // allocate the random variable (X-E(X))^n
-        // this constructor sets RandVariable.mean=mu
         RandVariable Xcn = new RandVariable(mu) {
 
             public double nextValue(int t) {
@@ -646,8 +610,7 @@ public abstract class RandomVariable {
             }
         }; // end return new
 
-    } // end plus
-
+    }
 
     public RandomVariable minus(final RandomVariable Y) {
         final RandomVariable X = this;
@@ -687,8 +650,4 @@ public abstract class RandomVariable {
         }; // end return new
 
     }
-
-
 }
-
-
